@@ -17,6 +17,7 @@ public class CameraGroupFollow : MonoBehaviour
     private float zoomSpeed = 0;
     private Bounds screenSize;
     private float ortho;
+    private bool frozen = false;
 
     void Awake()
     {
@@ -25,6 +26,11 @@ public class CameraGroupFollow : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (frozen)
+        {
+            return;
+        }
+
         screenSize = GetBounds();
         Vector2 center = GetCenter(screenSize);
 
@@ -52,6 +58,11 @@ public class CameraGroupFollow : MonoBehaviour
 
     public bool AtDestination()
     {
+        if (frozen)
+        {
+            return true;
+        }
+
         screenSize = GetBounds();
         ortho = WorldSizeToOrthoSize(new Vector2(screenSize.size.x, screenSize.size.y));
         Vector2 center = GetCenter(screenSize);
@@ -99,5 +110,10 @@ public class CameraGroupFollow : MonoBehaviour
         float orthoByWidth = (dimensions.x + PADDING_LEFT + PADDING_RIGHT) / (2f * camera.aspect);
 
         return Mathf.Max(orthoByHeight, orthoByWidth, MIN_ORTHO_HEIGHT);
+    }
+
+    public void Freeze()
+    {
+        frozen = true;
     }
 }
