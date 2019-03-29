@@ -7,13 +7,17 @@ using UnityEngine.UI;
 public class MuteButton : MonoBehaviour
 {
 
-    private Image image;
+    private Image[] images;
     private Text buttonText;
+    private Image buttonImage;
+
+    public bool ACTIVE_WHEN_MUTED = true;
 
     void Start()
     {
-        image = GetComponent<Image>();
+        images = GetComponentsInChildren<Image>();
         buttonText = GetComponentInChildren<Text>();
+
         if (!PlayerPrefs.HasKey("muted"))
         {
             PlayerPrefs.SetInt("muted", 0);
@@ -24,9 +28,20 @@ public class MuteButton : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float opacity = PlayerPrefs.GetInt("muted") == 1 ? 1f : .4f;
+        float opacity;
+        if (ACTIVE_WHEN_MUTED)
+        {
+            opacity = PlayerPrefs.GetInt("muted") == 1 ? 1f : .4f;
+        }
+        else
+        {
+            opacity = PlayerPrefs.GetInt("muted") != 1 ? 1f : .4f;
+        }
 
-        image.color = new Color(image.color.r, image.color.g, image.color.b, opacity);
+        foreach (var image in images)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, opacity);
+        }
         if (buttonText != null)
         {
             buttonText.color = new Color(buttonText.color.r, buttonText.color.g, buttonText.color.b, opacity);
