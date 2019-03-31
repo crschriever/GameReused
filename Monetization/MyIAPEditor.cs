@@ -1,10 +1,10 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(MyIAPManager))]
-public class LookAtPointEditor : Editor
+public class MyIAPEditor : Editor
 {
-
     void OnEnable()
     {
     }
@@ -30,3 +30,4 @@ public class LookAtPointEditor : Editor
         }
     }
 }
+#endif
