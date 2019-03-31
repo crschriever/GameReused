@@ -171,6 +171,8 @@ MonoBehaviour:
   COST: {fileID: 1035825157867290477}
   BUY_BUTTON: {fileID: 1035825158216963877}
   MAXED_LABEL: {fileID: 5864653302817200614}
+  POPUP_PREFAB: {fileID: 277009580475461271, guid: 7cffcfec5a3fb9d4dbabc93f885ff54c,
+    type: 3}
 --- !u!1 &1035825157867290387
 GameObject:
   m_ObjectHideFlags: 0

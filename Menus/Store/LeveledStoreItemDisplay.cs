@@ -19,6 +19,7 @@ public class LeveledStoreItemDisplay : MonoBehaviour
     public Text COST;
     public Button BUY_BUTTON;
     public Text MAXED_LABEL;
+    public GameObject POPUP_PREFAB;
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +52,15 @@ public class LeveledStoreItemDisplay : MonoBehaviour
 
     public void Purchase()
     {
-        MyIAPManager.instance.MakeCurrencyPurchase(item);
+        if (!MyIAPManager.instance.MakeCurrencyPurchase(item))
+        {
+            ShowPopup("Not enough coins to purchase this item. Tap Get More for more coins.");
+        }
+    }
+
+    private void ShowPopup(string body)
+    {
+        GameObject popup = Instantiate(POPUP_PREFAB);
+        popup.GetComponent<PopupManager>().ShowModal("Purchase", body);
     }
 }
