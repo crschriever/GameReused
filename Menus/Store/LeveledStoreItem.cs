@@ -44,4 +44,15 @@ public class LeveledStoreItem
     {
         return PlayerPrefs.GetInt(ID) >= levels.Length;
     }
+
+    public float GetCurrentValue()
+    {
+        int index = PlayerPrefs.GetInt(ID);
+        if (index == 0)
+        {
+            return DEFAULT_VALUE;
+        }
+
+        return GetCurrentLevel().value;
+    }
 }

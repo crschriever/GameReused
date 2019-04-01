@@ -11,7 +11,7 @@ public class CameraGroupFollow : MonoBehaviour
     public float PADDING_BOTTOM;
     public float PADDING_LEFT;
     public float MIN_ORTHO_HEIGHT;
-    public List<GameObject> objects = new List<GameObject>();
+    public List<Vector3> objects = new List<Vector3>();
     public float CHANGE_SPEED;
     private Vector3 moveSpeed = Vector3.zero;
     private float zoomSpeed = 0;
@@ -88,14 +88,14 @@ public class CameraGroupFollow : MonoBehaviour
             return new Bounds(Vector2.zero, Vector2.zero);
         }
 
-        var bounds = new Bounds(objects[0].transform.position, Vector2.zero);
+        var bounds = new Bounds(objects[0], Vector2.zero);
         for (int i = 1; i < objects.Count; i++)
         {
             if (objects[i] == null)
             {
                 continue;
             }
-            bounds.Encapsulate(objects[i].transform.position);
+            bounds.Encapsulate(objects[i]);
         }
 
         return bounds;
