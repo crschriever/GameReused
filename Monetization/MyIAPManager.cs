@@ -149,13 +149,11 @@ public class MyIAPManager : MonoBehaviour
 
     public float GetLeveledItemValue(string ID)
     {
-        Debug.Log(ID);
         return LEVELED_ITEMS[ID].GetCurrentValue();
     }
 
     public float GetRadioItemValue(string ID)
     {
-        Debug.Log(ID);
         return RADIO_ITEMS[ID].GetCurrentValue();
     }
 }

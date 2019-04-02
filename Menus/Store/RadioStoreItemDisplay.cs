@@ -45,6 +45,8 @@ public class RadioStoreItemDisplay : MonoBehaviour
         {
             SELECTED_INDICATOR.color = new Color(SELECTED_INDICATOR.color.r, SELECTED_INDICATOR.color.g, SELECTED_INDICATOR.color.b, 0);
         }
+
+        COST.text = string.Format(COST_FORMAT_STRING, item.COST[INDEX]);
     }
 
     public void Purchase()
