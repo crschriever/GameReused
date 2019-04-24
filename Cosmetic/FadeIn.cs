@@ -6,30 +6,48 @@ public class FadeIn : MonoBehaviour
 {
     public float FADE_SPEED;
     private SpriteRenderer renderer;
+    private CanvasGroup canvasGroup;
+    public float target = 1;
     private bool shouldFade;
-    private
 
-    void Start()
+    void OnEnable()
     {
         renderer = GetComponent<SpriteRenderer>();
-    }
+        canvasGroup = GetComponent<CanvasGroup>();
 
-    void OnAwake()
-    {
         shouldFade = true;
-        renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 0);
+        if (renderer != null)
+        {
+            renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 0);
+        }
+        else if (canvasGroup != null)
+        {
+            canvasGroup.alpha = 0;
+        }
     }
 
     void Update()
     {
         if (shouldFade)
         {
-            renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b,
-                Mathf.MoveTowards(renderer.color.a, 1, FADE_SPEED * Time.deltaTime));
-
-            if (renderer.color.a == 1)
+            if (renderer != null)
             {
-                shouldFade = false;
+                renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b,
+                    Mathf.MoveTowards(renderer.color.a, target, FADE_SPEED * Time.deltaTime));
+
+                if (renderer.color.a == target)
+                {
+                    shouldFade = false;
+                }
+            }
+            else if (canvasGroup != null)
+            {
+                canvasGroup.alpha = Mathf.MoveTowards(canvasGroup.alpha, target, FADE_SPEED * Time.deltaTime);
+
+                if (canvasGroup.alpha == target)
+                {
+                    shouldFade = false;
+                }
             }
         }
     }

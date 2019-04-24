@@ -21,7 +21,7 @@ public class CameraShake : MonoBehaviour
 
     public void Shake(float intensity, float time)
     {
-        Debug.Log("Shake");
+        // Debug.Log("Shake");
         this.intensity = intensity;
         InvokeRepeating("MoveCamera", 0, .05f);
         Invoke("ReturnToCenter", time);

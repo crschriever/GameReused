@@ -16,6 +16,10 @@ public class MyIAPManager : MonoBehaviour
     private RadioStoreItem[] RAD_ITEMS;
     public Dictionary<string, RadioStoreItem> RADIO_ITEMS = new Dictionary<string, RadioStoreItem>();
 
+    [SerializeField]
+    private CurrencyStoreItem[] CURR_ITEMS;
+    public Dictionary<string, CurrencyStoreItem> CURRENCY_ITEMS = new Dictionary<string, CurrencyStoreItem>();
+
     public static MyIAPManager instance;
 
     void Awake()
@@ -43,7 +47,6 @@ public class MyIAPManager : MonoBehaviour
 
         foreach (var entry in RAD_ITEMS)
         {
-            Debug.Log("Entry: " + entry.ID);
             if (!PlayerPrefs.HasKey(entry.ID))
             {
                 PlayerPrefs.SetInt(entry.ID, entry.DEFAULT);
@@ -51,6 +54,11 @@ public class MyIAPManager : MonoBehaviour
 
             RADIO_ITEMS[entry.ID] = entry;
             entry.UnlockIndex(entry.DEFAULT);
+        }
+
+        foreach (var entry in CURR_ITEMS)
+        {
+            CURRENCY_ITEMS[entry.ID] = entry;
         }
     }
 
@@ -90,10 +98,31 @@ public class MyIAPManager : MonoBehaviour
         return false;
     }
 
+    public bool MakeCurrencyPurchase(int cost)
+    {
+        int currency = PlayerPrefs.GetInt(CURRENCY_ID);
+        if (currency >= cost)
+        {
+            PlayerPrefs.SetInt(CURRENCY_ID, currency - cost);
+            return true;
+        }
+        return false;
+    }
+
     public void NoAds(Product prod)
     {
         ShowPopup("No Ads purchase completed. Thanks for supporting us. Enjoy the ad free game!");
         PlayerPrefs.SetInt("NoAds", 1);
+        Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", prod.definition.id));
+    }
+
+    public void PurchaseCurrency(Product prod)
+    {
+        ShowPopup("Coin purchase completed. Thanks for supporting us!");
+
+        CurrencyStoreItem item = CURRENCY_ITEMS[prod.definition.id];
+        AddCurrency(item.VALUE);
+
         Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", prod.definition.id));
     }
 
@@ -140,6 +169,8 @@ public class MyIAPManager : MonoBehaviour
             }
             entry.UnlockIndex(entry.DEFAULT);
         }
+
+        PlayerPrefs.SetInt("NoAds", 0);
     }
 
     public int GetCurrency()

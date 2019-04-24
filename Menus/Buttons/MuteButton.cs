@@ -22,7 +22,6 @@ public class MuteButton : MonoBehaviour
         {
             PlayerPrefs.SetInt("muted", 0);
         }
-        AudioListener.volume = PlayerPrefs.GetInt("muted") == 1 ? 0 : 1;
     }
 
     // Update is called once per frame
@@ -51,6 +50,5 @@ public class MuteButton : MonoBehaviour
     public void Toggle()
     {
         PlayerPrefs.SetInt("muted", PlayerPrefs.GetInt("muted") == 1 ? 0 : 1);
-        AudioListener.volume = PlayerPrefs.GetInt("muted") == 1 ? 0 : 1;
     }
 }

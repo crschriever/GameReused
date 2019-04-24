@@ -1,11 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-[RequireComponent(typeof(SpriteRenderer))]
 public class Blink : MonoBehaviour
 {
-
     public float maxOpacity;
     public float minOpacity;
     public float rate;
@@ -15,13 +13,14 @@ public class Blink : MonoBehaviour
     private bool dimming = true;
 
     private SpriteRenderer renderer;
-
+    private Image image;
 
     // Use this for initialization
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
-        currOpacity = renderer.color.a;
+        image = GetComponent<Image>();
+        currOpacity = renderer == null ? image.color.a : renderer.color.a;
     }
 
     // Update is called once per frame
@@ -52,6 +51,14 @@ public class Blink : MonoBehaviour
             currOpacity = Mathf.MoveTowards(currOpacity, maxOpacity, rate * Time.deltaTime);
         }
 
-        renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, currOpacity);
+        if (renderer != null)
+        {
+            renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, currOpacity);
+        }
+
+        if (image != null)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, currOpacity);
+        }
     }
 }

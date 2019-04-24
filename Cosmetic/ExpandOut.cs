@@ -9,10 +9,16 @@ public class ExpandOut : MonoBehaviour
     private SpriteRenderer renderer;
     public float EXPAND_SPEED;
     public float FADE_SPEED;
+    public bool ON_SPAWN = false;
+    public bool SHOULD_DESTROY = false;
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
+        if (ON_SPAWN)
+        {
+            expanding = true;
+        }
     }
 
     // Update is called once per frame
@@ -25,7 +31,14 @@ public class ExpandOut : MonoBehaviour
 
             if (renderer.color.a == 0)
             {
-                this.gameObject.SetActive(false);
+                if (SHOULD_DESTROY)
+                {
+                    Destroy(this.gameObject);
+                }
+                else
+                {
+                    this.gameObject.SetActive(false);
+                }
                 expanding = false;
             }
 

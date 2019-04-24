@@ -171,7 +171,7 @@ MonoBehaviour:
   COST: {fileID: 1035825157867290477}
   BUY_BUTTON: {fileID: 1035825158216963877}
   MAXED_LABEL: {fileID: 5864653302817200614}
-  POPUP_PREFAB: {fileID: 277009580475461271, guid: 7cffcfec5a3fb9d4dbabc93f885ff54c,
+  POPUP_PREFAB: {fileID: 2147872479065036057, guid: 7cffcfec5a3fb9d4dbabc93f885ff54c,
     type: 3}
 --- !u!1 &1035825157867290387
 GameObject:
@@ -264,6 +264,7 @@ GameObject:
   - component: {fileID: 1035825158216963879}
   - component: {fileID: 1035825158216963876}
   - component: {fileID: 1035825158216963877}
+  - component: {fileID: 5633150576392303529}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -380,8 +381,32 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5633150576392303529}
+        m_MethodName: Noise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &5633150576392303529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035825158216963883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a960517fdb9d01841abc76aa264df21c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NOISE_ID: Button
 --- !u!1 &1035825158767658912
 GameObject:
   m_ObjectHideFlags: 0

@@ -116,4 +116,18 @@ public class CameraGroupFollow : MonoBehaviour
     {
         frozen = true;
     }
+
+    public bool Contains(Vector2 pos)
+    {
+        var vertExtent = Camera.main.orthographicSize;
+        var horzExtent = vertExtent * Screen.width / Screen.height;
+
+        // Calculations assume map is position at the origin
+        float minX = transform.position.x - horzExtent;
+        float maxX = transform.position.x + horzExtent;
+        float minY = transform.position.y - vertExtent;
+        float maxY = transform.position.y + vertExtent;
+
+        return pos.x > minX && pos.x < maxX && pos.y > minY && pos.y < maxY;
+    }
 }
